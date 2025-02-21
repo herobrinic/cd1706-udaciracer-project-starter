@@ -340,7 +340,6 @@ function defaultFetchOpts() {
 	}
 }
 
-// TODO - Make a fetch call (with error handling!) to each of the following API endpoints 
 // MISSING API IMPLEMENTATIONS (TODO 5)
 async function getTracks() {
 	try {
@@ -378,7 +377,6 @@ function createRace(player_id, track_id) {
 }
 
 async function getRace(id) {
-	// GET request to `${SERVER}/api/races/${id}`
 	try {
 	  const response = await fetch(`${SERVER}/api/races/${id}`);
 	  return await response.json();
@@ -403,3 +401,4 @@ function accelerate(id) {
 	  ...defaultFetchOpts()
 	});
   }
+
