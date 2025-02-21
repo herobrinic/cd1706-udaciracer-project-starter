@@ -341,14 +341,16 @@ function defaultFetchOpts() {
 }
 
 // TODO - Make a fetch call (with error handling!) to each of the following API endpoints 
-
-function getTracks() {
-	console.log(`calling server :: ${SERVER}/api/tracks`)
-	// GET request to `${SERVER}/api/tracks`
-
-	// TODO: Fetch tracks
-	// TIP: Don't forget a catch statement!
-}
+// MISSING API IMPLEMENTATIONS (TODO 5)
+async function getTracks() {
+	try {
+	  const response = await fetch(`${SERVER}/api/tracks`);
+	  return await response.json();
+	} catch (error) {
+	  console.log('Failed to load tracks:', error);
+	  return [];
+	}
+  }
 
 function getRacers() {
 	// GET request to `${SERVER}/api/cars`
