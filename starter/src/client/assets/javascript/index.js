@@ -181,10 +181,15 @@ function handleSelectTrack(target) {
 	target.classList.add('selected')	
 }
 
+// IN handleAccelerate FUNCTION (TODO 4)
 function handleAccelerate() {
-	console.log("accelerate button clicked")
-	// TODO - Invoke the API call to accelerate
-}
+	console.log('Accelerating...');
+	if (store.race_id) {
+	  accelerate(store.race_id).catch(error => 
+		console.log('Acceleration failed:', error)
+	  );
+	}
+  }
 
 // HTML VIEWS ------------------------------------------------
 // Provided code - do not remove
