@@ -85,29 +85,27 @@ async function delay(ms) {
 // TIP: Do a full file search for TODO to find everything that needs to be done for the game to work
 
 // This async function controls the flow of the race, add the logic and error handling
+// IN handleCreateRace FUNCTION (TODO 1)
 async function handleCreateRace() {
-	console.log("in create race")
-
-	// render starting UI
-	renderAt('#race', renderRaceStartView(store.track_name))
-
-	// TODO - Get player_id and track_id from the store
-	
-	// const race = TODO - call the asynchronous method createRace, passing the correct parameters
-
-	// TODO - update the store with the race id in the response
-	// TIP - console logging API responses can be really helpful to know what data shape you received
-	console.log("RACE: ", race)
-	// store.race_id = 
-	
-	// The race has been created, now start the countdown
-	// TODO - call the async function runCountdown
-
-	// TODO - call the async function startRace
-	// TIP - remember to always check if a function takes parameters before calling it!
-
-	// TODO - call the async function runRace
-}
+	try {
+	  renderAt('#race', renderRaceStartView({ name: store.track_name }));
+  
+	  // Get required IDs from store
+	  const { player_id, track_id } = store;
+	  
+	  // Create new race
+	  const race = await createRace(player_id, track_id);
+	  store.race_id = race.id;
+	  console.log('Created race:', race);
+  
+	  // Start race sequence
+	  await runCountdown();
+	  await startRace(store.race_id);
+	  await runRace(store.race_id);
+	} catch (error) {
+	  console.log('Race creation failed:', error);
+	}
+  }
 
 function runRace(raceID) {
 	return new Promise(resolve => {
