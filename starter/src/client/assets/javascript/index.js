@@ -132,25 +132,28 @@ function runRace(raceID) {
 	});
   }
 
+// IN runCountdown FUNCTION (TODO 3)
 async function runCountdown() {
 	try {
-		// wait for the DOM to load
-		await delay(1000)
-		let timer = 3
-
-		return new Promise(resolve => {
-			// TODO - use Javascript's built in setInterval method to count down once per second
-
-			// run this DOM manipulation inside the set interval to decrement the countdown for the user
-			document.getElementById('big-numbers').innerHTML = --timer
-
-			// TODO - when the setInterval timer hits 0, clear the interval, resolve the promise, and return
-
-		})
-	} catch(error) {
-		console.log(error);
+	  await delay(1000);
+	  let count = 3;
+  
+	  return new Promise(resolve => {
+		const timerInterval = setInterval(() => {
+		  count--;
+		  document.getElementById('big-numbers').textContent = count;
+  
+		  if (count <= 0) {
+			clearInterval(timerInterval);
+			resolve();
+		  }
+		}, 1000);
+	  });
+	} catch (error) {
+	  console.log('Countdown error:', error);
 	}
-}
+  }
+  
 
 function handleSelectRacer(target) {
 	console.log("selected a racer", target.id)
