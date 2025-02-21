@@ -352,12 +352,15 @@ async function getTracks() {
 	}
   }
 
-function getRacers() {
-	// GET request to `${SERVER}/api/cars`
-
-	// TODO: Fetch racers
-	// TIP: Do a file search for "TODO" to make sure you find all the things you need to do! There are even some vscode plugins that will highlight todos for you
-}
+  async function getRacers() {
+	try {
+	  const response = await fetch(`${SERVER}/api/cars`);
+	  return await response.json();
+	} catch (error) {
+	  console.log('Failed to load racers:', error);
+	  return [];
+	}
+  }
 
 function createRace(player_id, track_id) {
 	player_id = parseInt(player_id)
