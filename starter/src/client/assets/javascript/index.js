@@ -377,9 +377,16 @@ function createRace(player_id, track_id) {
 	.catch(err => console.log("Problem with createRace request::", err))
 }
 
-function getRace(id) {
+async function getRace(id) {
 	// GET request to `${SERVER}/api/races/${id}`
-}
+	try {
+	  const response = await fetch(`${SERVER}/api/races/${id}`);
+	  return await response.json();
+	} catch (error) {
+	  console.log('Race status check failed:', error);
+	  return { status: 'error' };
+	}
+  }
 
 function startRace(id) {
 	return fetch(`${SERVER}/api/races/${id}/start`, {
